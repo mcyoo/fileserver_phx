@@ -3,10 +3,11 @@ version: '3.8'
 services:
   fileserver:
     image: 127.0.0.1:5000/fileserver
-    build: ./fileserver
     command: mix phx.server
     volumes:
       - ./fileserver:/app
+    depends_on:
+      - db
     environment:
       MIX_ENV: prod
       SECRET_KEY_BASE: gwsmwKuOjrKkDdUG7+5aNIajSROLpBr/O8AQ71dLGNS4Hyq5i1XPNNmOWY3Sy24y
