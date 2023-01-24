@@ -9,16 +9,8 @@ services:
     depends_on:
       - db
     environment:
-      MIX_ENV: prod
-      SECRET_KEY_BASE: gwsmwKuOjrKkDdUG7+5aNIajSROLpBr/O8AQ71dLGNS4Hyq5i1XPNNmOWY3Sy24y
-      DATABASE_URL: "ecto://relay_server:portable20relaydb!@db/relay_server_db"
-      CURRENT_SERVER: local
-      PORT: "4000"
-      POSTGRES_HOST_URL: "db"
-      POSTGRES_HOST_URL_DEFAULT: "localhost"
-      ORIGIN_BASE: "localhost"
-      ORIGIN_URL: "http://localhost"
-      ORIGIN_PORT: "4000"
+      - MIX_ENV=prod
+      - DATABASE_URL=ecto://postgres:postgres@db/my_db
     ports:
       - 4000:4000
     logging:
@@ -39,13 +31,9 @@ services:
   db:
     image: arm32v7/postgres:latest
     environment:
-      - POSTGRES_USER=relay_server
-      - POSTGRES_PASSWORD=portable20relaydb!
-      - POSTGRES_DB=relay_server_db
-      - POSTGRESQL_REPLICATION_MODE=master
-      - POSTGRESQL_REPLICATION_USER=repl_user
-      - POSTGRESQL_REPLICATION_PASSWORD=repl_password
-      - POSTGRESQL_SHARED_PRELOAD_LIBRARIES=pgaudit,pg_stat_statements
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=my_db
     networks:
       - traefik-public
     ports:
