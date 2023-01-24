@@ -6,6 +6,9 @@ RUN mix local.hex --force && mix local.rebar --force && mix archive.install hex 
 
 RUN mkdir /app
 
+ENV SECRET_KEY_BASE=gwsmwKuOjrKkDdUG7+5aNIajSROLpBr/O8AQ71dLGNS4Hyq5i1XPNNmOWY3Sy24y
+ENV DATABASE_URL=ecto://relay_server:portable20relaydb!@db/relay_server_db
+
 WORKDIR /app
 
 COPY . .
