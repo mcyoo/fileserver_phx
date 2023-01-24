@@ -4,7 +4,9 @@ version: "3"
 services:
   fileserver:
     image: 127.0.0.1:5000/fileserver
-    build: ./fileserver
+    build:
+      context: ./fileserver
+    container_name: fileserver
     volumes:
       - .:/app
     environment:
