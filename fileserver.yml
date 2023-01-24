@@ -48,7 +48,7 @@ services:
   adminer:
     image: adminer
     ports:
-      - 8088:8080
+      - 8088:8081
     networks:
       - traefik-public
     logging:
@@ -62,7 +62,7 @@ services:
         traefik.constraint-label: traefik-public
         traefik.http.routers.pgadmin.entrypoints: web
         traefik.http.routers.pgadmin.rule: Host(`pgadmin.bankjsy.giize.com`)
-        traefik.http.services.pgadmin.loadbalancer.server.port: 8080
+        traefik.http.services.pgadmin.loadbalancer.server.port: 8081
 
 networks:
   traefik-public:
