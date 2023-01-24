@@ -3,7 +3,7 @@ version: '3.8'
 services:
   fileserver:
     image: 127.0.0.1:5000/fileserver
-    command: ["mix", "do", "deps.get, deps.compile, compile", "phx.server"]
+    command: ["mix", "phx.server"]
     volumes:
       - ./fileserver:/app
     depends_on:
