@@ -3,7 +3,7 @@ version: '3.8'
 services:
   fileserver:
     image: 127.0.0.1:5000/fileserver
-    command: /bin/sh -c 'cd /app && mix phx.server'
+    build: ./fileserver
     volumes:
       - .:/app
     environment:
