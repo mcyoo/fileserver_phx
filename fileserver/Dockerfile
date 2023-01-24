@@ -1,24 +1,16 @@
-# Use the official Elixir image as the base image
+# ./Dockerfile
+
+# Extend from the official Elixir image.
 FROM elixir:latest
 
-# Set the working directory
+# Create app directory and copy the Elixir projects into it.
+RUN mkdir /app
+COPY . /app
 WORKDIR /app
 
-# Copy the application files into the container
-COPY . .
+# Install Hex package manager.
+# By using `--force`, we don’t need to type “Y” to confirm the installation.
+RUN mix local.hex --force
 
-# Install the Phoenix dependencies
-RUN mix local.hex --force && \
-    mix local.rebar --force && \
-    mix deps.get
-
-# Build the assets
-RUN cd assets && \
-    npm install && \
-    node node_modules/webpack/bin/webpack.js --mode production
-
-# Compile the application
-RUN mix compile
-
-# Run the Phoenix server
-CMD ["mix", "phx.server"]
+# Compile the project.
+RUN mix do compile
