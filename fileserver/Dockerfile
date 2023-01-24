@@ -1,16 +1,15 @@
-# ./Dockerfile
-
-# Extend from the official Elixir image.
 FROM elixir:latest
 
-# Create app directory and copy the Elixir projects into it.
+RUN apt-get update && apt-get install -y nodejs inotify-tools
+
+RUN mix local.hex --force && mix local.rebar --force && mix archive.install hex phx_new 1.5.11
+
 RUN mkdir /app
-COPY . /app
+
 WORKDIR /app
 
-# Install Hex package manager.
-# By using `--force`, we don’t need to type “Y” to confirm the installation.
-RUN mix local.hex --force
+COPY . .
 
-# Compile the project.
-RUN mix do compile
+RUN mix deps.get && mix do compile
+
+CMD mix phx.server
