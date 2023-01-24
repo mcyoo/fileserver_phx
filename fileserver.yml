@@ -4,10 +4,19 @@ services:
   fileserver:
     image: 127.0.0.1:5000/fileserver
     build: ./fileserver
+    command: mix phx.server
     volumes:
-      - .:/app
+      - ./fileserver:/app
     environment:
-      - MIX_ENV=prod
+      MIX_ENV: prod
+      DATABASE_URL: "ecto://jackson:123123@db/jackson_db"
+      CURRENT_SERVER: local
+      PORT: "4000"
+      POSTGRES_HOST_URL: "db"
+      POSTGRES_HOST_URL_DEFAULT: "localhost"
+      ORIGIN_BASE: "localhost"
+      ORIGIN_URL: "http://localhost"
+      ORIGIN_PORT: "4000"
     ports:
       - 4000:4000
     logging:

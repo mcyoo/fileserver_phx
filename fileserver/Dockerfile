@@ -12,4 +12,4 @@ COPY . .
 
 RUN mix deps.get && mix do compile
 
-CMD mix phx.server
+EXPOSE 4000
