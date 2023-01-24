@@ -1,0 +1,82 @@
+version: '3.2'
+
+services:
+  fileserver:
+    build: ./fileserver
+    volumes:
+      - .:/app
+    restart: always
+    logging:
+      options:
+        max-file: "3"
+        max-size: "250m"
+    ports:
+      - 4000:4000
+    networks:
+      - traefik-public
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+      update_config:
+        parallelism: 1
+        delay: 10s
+        order: stop-first
+      labels:
+        traefik.enable: "true"
+        traefik.docker.network: traefik-public
+        traefik.constraint-label: traefik-public
+        traefik.http.routers.fileserver.entrypoints: web
+        traefik.http.routers.fileserver.rule: Host(`fileserver.bankjsy.giize.com`)
+        traefik.http.services.fileserver.loadbalancer.server.port: 4000
+
+  db:
+    #   Use the Docker Image postgres. This will pull the newest release.
+    image: arm32v7/postgres:latest
+    #   Setup the username, password, and database name. You can changes these values.
+    environment:
+      - POSTGRES_USER=jackson
+      - POSTGRES_PASSWORD=123123
+      - POSTGRES_DB=db
+    #   Maps port 54320 (localhost) to port 5432 on the container. You can change the ports to fix your needs.
+    networks:
+      - traefik-public
+    ports:
+      - "5432:5432"
+    #   Set a volume some that database is not lost after shutting down the container.
+    #   I used the name postgres-data but you can changed it to something else.
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    logging:
+      options:
+        max-file: "3"
+        max-size: "250m"
+
+  adminer:
+    image: adminer
+    ports:
+      - 8088:8080
+    networks:
+      - traefik-public
+    logging:
+      options:
+        max-file: "3"
+        max-size: "50m"
+    deploy:
+      labels:
+        traefik.enable: "true"
+        traefik.docker.network: traefik-public
+        traefik.constraint-label: traefik-public
+        traefik.http.routers.pgadmin.entrypoints: web
+        traefik.http.routers.pgadmin.rule: Host(`pgadmin.bankjsy.giize.com`)
+        traefik.http.services.pgadmin.loadbalancer.server.port: 8080
+
+networks:
+  traefik-public:
+    name: traefik-public
+    external: true
+
+volumes:
+  postgres_data:
