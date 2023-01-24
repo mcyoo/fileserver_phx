@@ -16,7 +16,8 @@ COPY . .
 ENV SECRET_KEY_BASE=gwsmwKuOjrKkDdUG7+5aNIajSROLpBr/O8AQ71dLGNS4Hyq5i1XPNNmOWY3Sy24y
 ENV DATABASE_URL=ecto://postgres:postgres@db/my_db
 
-RUN mix do deps.get, deps.compile, compile
+RUN mix deps.get
+RUN mix do deps.compile, compile
 
 EXPOSE 4000
 
