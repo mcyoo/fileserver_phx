@@ -1,0 +1,17 @@
+# WARNING: this file is not suitable for production, please use with caution
+version: "3"
+
+services:
+  fileserver:
+    image: 127.0.0.1:5000/fileserver
+    build: ./fileserver
+    volumes:
+      - .:/app
+    environment:
+      - MIX_ENV=prod
+    ports:
+      - 4000:4000
+    logging:
+      options:
+        max-file: "3"
+        max-size: "250m"
