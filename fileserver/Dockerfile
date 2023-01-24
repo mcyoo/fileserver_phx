@@ -11,3 +11,5 @@ WORKDIR /app
 COPY . .
 
 RUN mix deps.get && mix do compile
+
+CMD mix phx.server
