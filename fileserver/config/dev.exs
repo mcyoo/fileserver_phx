@@ -2,10 +2,10 @@ use Mix.Config
 
 # Configure your database
 config :fileserver, Fileserver.Repo,
-  username: "postgres",
-  password: "postgres",
-  database: "fileserver_dev",
-  hostname: "localhost",
+  username: "jackson",
+  password: "portable20relaydb!",
+  database: "pg_db",
+  hostname: System.get_env("POSTGRES_HOST_URL") || System.get_env("POSTGRES_HOST_URL_DEFAULT"),
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
