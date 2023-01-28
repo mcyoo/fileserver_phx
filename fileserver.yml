@@ -10,7 +10,7 @@ services:
       - db
     environment:
       - MIX_ENV=prod
-      - DATABASE_URL=ecto://jackson:pass1247@db/pg_db
+      - DATABASE_URL=ecto://jackson:portable20relaydb!@db/pg_db
     ports:
       - 4000:4000
     logging:
@@ -32,7 +32,7 @@ services:
     image: arm32v7/postgres:latest
     environment:
       - POSTGRES_USER=jackson
-      - POSTGRES_PASSWORD=pass1247
+      - POSTGRES_PASSWORD=portable20relaydb!
       - POSTGRES_DB=pg_db
     networks:
       - traefik-public
