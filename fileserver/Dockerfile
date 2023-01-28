@@ -19,6 +19,8 @@ ENV DATABASE_URL=ecto://jackson:portable20relaydb!@db/pg_db
 RUN mix deps.get
 RUN mix do deps.compile, compile
 
+RUN mix do compile, phx.digest
+
 EXPOSE 4000
 
 CMD ["mix", "phx.server"]
