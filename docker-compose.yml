@@ -32,6 +32,17 @@ services:
       options:
         max-file: "3"
         max-size: "250m"
+  
+  adminer:
+    image: adminer
+    ports:
+      - 8088:8081
+    logging:
+      options:
+        max-file: "3"
+        max-size: "50m"
+    depends_on: 
+      - db
 
 volumes:
   postgres_data:

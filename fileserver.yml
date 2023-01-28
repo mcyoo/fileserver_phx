@@ -55,6 +55,8 @@ services:
       options:
         max-file: "3"
         max-size: "50m"
+    depends_on: 
+      - db
     deploy:
       labels:
         traefik.enable: "true"
