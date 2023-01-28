@@ -6,6 +6,10 @@ RUN echo "**** install Python ****" && \
     apt-get install python3 && \
     if [ ! -e /usr/bin/python ]; then ln -sf python3 /usr/bin/python ; fi
 
+# if npm makes python3 error, add below line
+RUN apt-get install -y python2
+RUN npm config set python python2.7
+
 RUN apt-get update && \
     apt-get install -y postgresql-client
 
