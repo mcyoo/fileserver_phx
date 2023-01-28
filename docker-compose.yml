@@ -11,7 +11,7 @@ services:
       - db
     environment:
       - MIX_ENV=prod
-      - DATABASE_URL=ecto://postgres:postgres@db/my_db
+      - DATABASE_URL=ecto://jackson:pass1247@db/pg_db
     ports:
       - 4000:4000
     logging:
@@ -21,9 +21,9 @@ services:
   db:
     image: arm32v7/postgres:latest
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=my_db
+      - POSTGRES_USER=jackson
+      - POSTGRES_PASSWORD=pass1247
+      - POSTGRES_DB=pg_db
     ports:
       - "5432:5432"
     volumes:

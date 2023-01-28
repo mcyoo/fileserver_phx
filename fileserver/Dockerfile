@@ -14,7 +14,7 @@ WORKDIR /app
 COPY . .
 
 ENV SECRET_KEY_BASE=gwsmwKuOjrKkDdUG7+5aNIajSROLpBr/O8AQ71dLGNS4Hyq5i1XPNNmOWY3Sy24y
-ENV DATABASE_URL=ecto://postgres:postgres@db/my_db
+ENV DATABASE_URL=ecto://jackson:pass1247@db/pg_db
 
 RUN mix deps.get
 RUN mix do deps.compile, compile
