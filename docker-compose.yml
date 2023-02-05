@@ -6,7 +6,18 @@ services:
     build: ./fileserver
     container_name: fileserver
     volumes:
-      - ./fileserver:/app
+      - ./fileserver/logs:/tmp
+      - ./fileserver/test:/app/test
+      - ./fileserver/mix.exs:/mix.exs
+      - ./fileserver/mix.lock:/app/mix.lock
+      - ./fileserver/.formatter.exs:/app/.formatter.exs
+      - ./fileserver/lib:/app/lib
+      - ./fileserver/priv:/app/priv
+      - ./fileserver/config:/app/config
+      - ./fileserver/assets/css:/app/assets/css
+      - ./fileserver/assets/static:/app/assets/static
+      - ./fileserver/assets/js:/app/assets/js
+      - ./fileserver/assets/webpack.config.js:/app/assets/webpack.config.js
     depends_on:
       - db
     environment:
