@@ -49,6 +49,12 @@ services:
     image: adminer
     ports:
       - 8088:8081
+    command:
+      - 'php'
+      - '-S'
+      - '[::]:8081'
+      - '-t'
+      - '/var/www/html'
     logging:
       options:
         max-file: "3"
